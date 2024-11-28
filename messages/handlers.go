@@ -105,7 +105,7 @@ func (mh *MessageHandler) DeleteMessageHandler(w http.ResponseWriter, r *http.Re
 	isPremium := r.Context().Value(auth.IsPremiumKey).(bool)
 
 	if !isPremium {
-		http.Error(w, "Удаление сообщений доступно только суперпользователям", http.StatusForbidden)
+		http.Error(w, "Удаление сообщений доступно только премиум-пользователям", http.StatusForbidden)
 		return
 	}
 
@@ -131,7 +131,7 @@ func (mh *MessageHandler) UpdateMessageHandler(w http.ResponseWriter, r *http.Re
 	isPremium := r.Context().Value(auth.IsPremiumKey).(bool)
 
 	if !isPremium {
-		http.Error(w, "Обновление сообщений доступно только суперпользователям", http.StatusForbidden)
+		http.Error(w, "Обновление сообщений доступно только премиум-пользователям", http.StatusForbidden)
 		return
 	}
 
