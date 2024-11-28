@@ -29,7 +29,7 @@ func main() {
 		}
 	}()
 
-	tokenService := auth.NewTokenService("your_secret_key")
+	tokenService := auth.NewTokenService("9a8cfe1d5f3a4b2b7e6d9c2a0f1e4g3h")
 	userRepository := users.NewUserRepository(database.Connection)
 	userService := users.NewUserService(userRepository, tokenService)
 	messageRepository := messages.NewMessageRepository(database.Connection)
