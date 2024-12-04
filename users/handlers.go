@@ -98,8 +98,17 @@ func (uh *UserHandler) UpdateUserHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Информация о пользователе успешно обновлена"))
+	token, err := uh.UserService.GenerateToken(userID, updatedUser.IsPremium)
+	if err != nil {
+		http.Error(w, "Не удалось создать новый токен", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{
+		"message": "Информация о пользователе успешно обновлена",
+		"token":   token,
+	})
 }
 
 func (uh *UserHandler) DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
